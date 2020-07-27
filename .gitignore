@@ -3,3 +3,5 @@
 .idea/misc.xml
 .idea/fetestem.iml
 .idea/.gitignore
+/node_modules/
+/package-lock.json
