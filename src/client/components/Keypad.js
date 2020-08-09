@@ -91,6 +91,15 @@ class Keypad extends Component {
     }
 
     //create render keypad buttons here
+    renderButtons() {
+        let buttonArray = [1,2,3,4,5,6,7,8,9,0];
+
+        return buttonArray.map((item) => {
+            return (
+                <button style={{margin: '2px'}} onClick={ this.updateProductId } value={item}>{ item }</button>
+            )
+        });
+    }
 
     clearInput () {
         this.setState({
@@ -106,16 +115,7 @@ class Keypad extends Component {
                 <input type="text" value={this.state.productId} readOnly/>
                 <span style={{display: 'block', margin: '5px'}}>{this.state.errMsg}</span>
                 <div>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="1">1</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="2">2</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="3">3</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="4">4</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="5">5</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="6">6</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="7">7</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="8">8</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="9">9</button>
-                    <button style={{margin: '2px'}} onClick={ this.updateProductId } value="0">0</button>
+                    {this.renderButtons()}
                     <button className='btn waves-effect waves-light' style={{margin: '2px'}} onClick={ this.buyProduct }>Buy product</button>
                     <button className='btn waves-effect waves-light' style={{margin: '2px'}} onClick={ this.clearInput }>Clear</button>
                 </div>
