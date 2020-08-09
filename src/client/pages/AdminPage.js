@@ -13,7 +13,8 @@ class AdminPage extends Component {
             price: '',
             name: '',
             currency: '$',
-            errors: {}
+            errors: {},
+            success:''
         };
 
         this.deleteProduct = this.deleteProduct.bind(this);
@@ -65,12 +66,13 @@ class AdminPage extends Component {
         e.preventDefault();
         this.setState({
             method: 'add',
-            id: '0',
-            quantity: '0',
-            price: '0',
+            id: '',
+            quantity: '',
+            price: '',
             name: '',
             currency: '$',
-            errors: {}
+            errors: {},
+            success: ''
         });
     }
 
@@ -112,17 +114,33 @@ class AdminPage extends Component {
         e.preventDefault();
         if(!this.formValidation()){ return; }
         let product = { ...this.state };
+        let errors = {};
+
         if(this.state.method === 'add'){
+            let found = false;
+
+            this.props.products.map((item) => {
+                Object.keys(product).forEach((key) => {
+                    if(key === 'id' && product[key] === item[key] && key !== 'currency' && key !== '_id') {
+                        found = true;
+                        errors.unsuccessful = 'A product with these details already exists';
+                    }
+                })
+            });
+
+            if (found) return this.setState({ errors });
             //add product here
             this.props.addProduct(product).then(() => {
                 this.props.fetchProducts();
+                this.setState({ success: 'Product added successfully'})
             }, (err) => {
                 console.log('There was an error adding the new product: ', err);
             })
-        } else if(this.state.method === 'modify'){
+        } else if(this.state.method === 'modify') {
             //modify product here
             this.props.modifyProduct(product).then(() => {
                 this.props.fetchProducts();
+                this.setState({ success: 'Product modified successfully'})
             }, (err) => {
                 console.log('There was an error modifying the current product: ', err);
             })
@@ -135,10 +153,10 @@ class AdminPage extends Component {
         return this.props.products.map((product) => {
             return (
                 <tr key={product['_id']}>
-                    <td style={{'min-width': '100px'}}>{product.name}</td>
-                    <td style={{'min-width': '100px'}}>{product.id}</td>
-                    <td style={{'min-width': '100px'}}>{product.price} {product.currency}</td>
-                    <td style={{'min-width': '100px'}}>{product.quantity}</td>
+                    <td style={{'minWidth': '100px'}}>{product.name}</td>
+                    <td style={{'minWidth': '100px'}}>{product.id}</td>
+                    <td style={{'minWidth': '100px'}}>{product.price} {product.currency}</td>
+                    <td style={{'minWidth': '100px'}}>{product.quantity}</td>
                     <td><button className='waves-effect waves-light btn center' style={{ height: '33px', margin: '3px'}}
                                 onClick={ this.deleteProduct } value={product['_id']}>Delete</button></td>
                     <td><button className='waves-effect waves-light btn center' style={{ height: '33px', margin: '3px'}}
@@ -176,10 +194,12 @@ class AdminPage extends Component {
                                type="number" id="price"/>
                         <span style={{color: "red", float: 'left'}}>{this.state.errors.price}</span>
                     </div>
+                    <span style={{color: "red", float: 'left', width: '100%'}}>{ this.state.errors.unsuccessful }</span>
                     <button className='btn waves-effect waves-light' style={{ height: '33px', margin: '3px'}}
                             type="submit" value="Submit">Submit</button>
                     <button className='btn waves-effect waves-light' style={{ height: '33px', margin: '3px'}}
                             onClick={ this.resetFields }>Clear</button>
+                    <span style={{color: "green", float: 'left', width: '100%'}}>{this.state.success}</span>
                 </form>
             </div>
         )
@@ -204,7 +224,7 @@ class AdminPage extends Component {
                         </tbody>
                     </table>
                 </div>
-                <div className="row" style={{width: '50%', float: 'right', 'padding-left': '30px'}}>
+                <div className="row" style={{width: '50%', float: 'right', 'paddingLeft': '30px'}}>
                     {this.renderForm()}
                 </div>
             </div>

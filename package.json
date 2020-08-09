@@ -1,5 +1,5 @@
 {
-  "name": "react-ssr",
+  "name": "front-end-test-em",
   "version": "1.0.0",
   "description": "Server side rendering project",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "dev:build-server": "webpack --config webpack.server.js --watch",
     "dev:build-client": "webpack --config webpack.client.js --watch"
   },
-  "author": "",
+  "author": "Vlad Stefan",
   "license": "ISC",
   "dependencies": {
     "axios": "0.16.2",

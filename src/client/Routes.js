@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import ProductsListPage from "./pages/ProductsListPage";
 import AdminPage from "./pages/AdminPage";
 import AddFundsPage from "./pages/AddFundsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default [
     {
@@ -25,6 +26,9 @@ export default [
             {
                 ...AddFundsPage,
                 path: '/payment'
+            },
+            {
+                ...NotFoundPage
             }
         ]
     }

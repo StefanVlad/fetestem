@@ -130,7 +130,7 @@ class AddFundsPage extends Component {
 
     render() {
         return (
-            <div className="container center-align" style={{'padding-top' :'50px', width: '25%'}}>
+            <div className="container center-align" style={{'paddingTop' :'50px', width: '25%'}}>
                 <div>
                     <span>Current wallet amount: </span>
                     <span>{this.state.wallet.balance}</span>
