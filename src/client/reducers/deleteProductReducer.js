@@ -1,10 +1,11 @@
-//import actions here
+import { DELETE_PRODUCT } from "../actions";
 
 export default (state = [], action) => {
     switch (action.type) {
-        /*case FETCH_USERS:
-            return action.payload.data;*/
+        case DELETE_PRODUCT:
+            return action.payload.data;
         default:
             return state;
+
     }
 }

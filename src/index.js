@@ -3,18 +3,16 @@ import express from 'express';
 import { matchRoutes } from 'react-router-config';
 import Routes from './client/Routes';
 import renderer from './helpers/renderer';
-import createStore from './helpers/createStore';
+import createStore from "./helpers/createStore";
 
 const app = express();
 
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-    //We initialize the store here because we want the store(data) to be already loaded before the app is rendered
     const store = createStore();
 
-    //Some logic to initialize and load data into the store
-    const promises = matchRoutes(Routes, req.path).map(( { route } ) => {
+    const promises = matchRoutes(Routes, req.path).map(({ route }) => {
         return route.loadData ? route.loadData(store) : null;
     });
 
@@ -24,5 +22,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('Listening on port 3000');
+    console.log('Listening on port 3000')
 });
