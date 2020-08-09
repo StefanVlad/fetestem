@@ -1,6 +1,16 @@
 import { combineReducers } from "redux";
-import usersReducer from "./usersReducer";
+import productsReducer from "./productsReducer";
+import deleteProductReducer from "./deleteProductReducer";
+import modifyProductReducer from "./modifyProductReducer";
+import addProductReducer from "./addProductReducer";
+import getWalletReducer from "./getWalletReducer";
+import updateWalletReducer from "./updateWalletReducer";
 
 export default combineReducers({
-    users: usersReducer
+    products: productsReducer,
+    wallet: getWalletReducer,
+    modifyProduct: modifyProductReducer,
+    deleteProduct: deleteProductReducer,
+    addProduct: addProductReducer,
+    updateWallet: updateWalletReducer
 })
