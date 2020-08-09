@@ -9,7 +9,6 @@ class ProductsList extends Component {
     constructor(props) {
         super(props);
 
-        console.log('ProductsList this.props', this.props);
     }
 
     componentDidMount() {
@@ -17,15 +16,8 @@ class ProductsList extends Component {
         this.props.getWallet();
     }
 
-    componentDidUpdate(prevProps) {
-        if(this.props !== prevProps) {
-            // console.log('this.props', this.props);
-        }
-    }
-
     renderProductsList() {
         if (!_.isEmpty(this.props.products)) {
-            console.log('sloboz', this.props.products);
             return this.props.products.map((product) => {
                 return (
                     <tr key={product['_id']}>
@@ -37,7 +29,6 @@ class ProductsList extends Component {
                 )
             })
         }
-        console.log('slobozel', this.props.products);
         return <tr><td> Loading... </td></tr>
     }
 

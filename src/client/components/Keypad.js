@@ -12,8 +12,6 @@ class Keypad extends Component {
             successMsg: ''
         };
 
-        console.log('Keypad this.props', this.props);
-
         this.updateProductId = this.updateProductId.bind(this);
         this.clearInput = this.clearInput.bind(this);
         this.buyProduct = this.buyProduct.bind(this);
@@ -63,7 +61,6 @@ class Keypad extends Component {
                     balance: this.state.wallet.balance - currentProduct.price
                 };
                 if(currentProduct.quantity > 1) {
-                    console.log('currentProduct', currentProduct);
                     currentProduct.quantity -= 1;
                     let promises = [this.props.updateWallet(updatedWallet), this.props.modifyProduct(currentProduct)];
 

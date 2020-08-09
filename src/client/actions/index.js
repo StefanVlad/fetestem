@@ -38,7 +38,6 @@ export const modifyProduct = (product) => async dispatch => {
         id: product.id,
         currency: product.currency
     };
-    console.log('body', body);
     const res = await axios.put(`${baseUrl}/products/${product['_id']}`, body);
 
     dispatch({
